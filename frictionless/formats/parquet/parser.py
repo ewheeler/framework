@@ -34,7 +34,7 @@ class ParquetParser(Parser):
                 self.resource.normpath, "rb", is_text=False
             )
             handle = handles.handle
-        if 'pyarrow' == settings.PARQUET_ENGINE:
+        if "pyarrow" == settings.PARQUET_ENGINE:
             file = platform.pyarrow.parquet.ParquetFile(handle)
             # TODO pass in `control` params to `iter_batches` and/or `to_pandas`
             for group, df in enumerate(file.iter_batches(), start=1):
@@ -44,9 +44,11 @@ class ParquetParser(Parser):
                         if group != 1 and line == 1:
                             continue
                         yield cells
-        if 'fastparquet' == settings.PARQUET_ENGINE:
+        if "fastparquet" == settings.PARQUET_ENGINE:
             file = platform.fastparquet.ParquetFile(handle)
-            for group, df in enumerate(file.iter_row_groups(**control.to_python()), start=1):
+            for group, df in enumerate(
+                file.iter_row_groups(**control.to_python()), start=1
+            ):
                 with TableResource(data=df, format="pandas") as resource:
                     for line, cells in enumerate(resource.cell_stream, start=1):
                         # Starting from second group we don't need a header row
@@ -57,8 +59,10 @@ class ParquetParser(Parser):
     # Write
 
     def write_row_stream(self, source):
-        if 'pyarrow' == settings.PARQUET_ENGINE:
-            platform.pyarrow.parquet.write_to_dataset(platform.pyarrow.Table.from_pandas(source.to_pandas()),
-                                                      root_path=self.resource.normpath)
-        if 'fastparquet' == settings.PARQUET_ENGINE:
+        if "pyarrow" == settings.PARQUET_ENGINE:
+            platform.pyarrow.parquet.write_to_dataset(
+                platform.pyarrow.Table.from_pandas(source.to_pandas()),
+                root_path=self.resource.normpath,
+            )
+        if "fastparquet" == settings.PARQUET_ENGINE:
             platform.fastparquet.write(self.resource.normpath, source.to_pandas())
