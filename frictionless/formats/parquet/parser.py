@@ -3,7 +3,7 @@ from ...platform import platform
 from ...resources import TableResource
 from .control import ParquetControl
 from ...system import Parser
-from .. import settings
+from . import settings
 
 
 class ParquetParser(Parser):
