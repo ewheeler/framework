@@ -55,6 +55,7 @@ EXTRAS_REQUIRE = {
     "ods": ["ezodf>=0.3", "lxml>=4.0"],
     "pandas": ["pandas>=1.0"],
     "parquet": ["fastparquet>=0.8"],
+    "pyarrow": ["pyarrow>=12.0"],
     "postgresql": ["sqlalchemy>=1.4", "psycopg>=3.0", "psycopg2>=2.9"],
     "server": ["fastapi>=0.78", "uvicorn>=0.17", "python-multipart>=0.0"],
     "spss": ["savReaderWriter>=3.0"],

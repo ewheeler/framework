@@ -371,6 +371,13 @@ class Platform:
         return fastparquet
 
     @cached_property
+    @extras(name="pyarrow")
+    def pyarrow(self):
+        import pyarrow
+
+        return pyarrow
+
+    @cached_property
     @extras(name="spss")
     def sav_reader_writer(self):
         import savReaderWriter

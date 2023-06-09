@@ -23,6 +23,7 @@ PACKAGE_PATH = "datapackage.json"
 COMPRESSION_FORMATS = ["zip", "gz"]
 GEOJSON_PROFILE = json.loads(read("assets", "profiles", "geojson.json"))
 TOPOJSON_PROFILE = json.loads(read("assets", "profiles", "topojson.json"))
+PARQUET_ENGINE = "fastparquet"
 
 
 # Defaults
